@@ -1,0 +1,10 @@
+# Study Buddy AI – Python dependencies
+# Install with:  pip install -r requirements.txt
+
+streamlit>=1.35.0
+langgraph>=0.2.0
+langchain-core>=0.2.0
+langchain-ollama>=0.1.0
+pypdf>=4.0.0
+pytest>=8.0.0
+typing-extensions>=4.9.0

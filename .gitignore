@@ -1,0 +1,42 @@
+# Virtual environment
+.venv/
+venv/
+env/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Environment / secrets
+.env
+.env.*
+
+# IDE
+.vscode/
+.idea/
+
+# Personal study notes – do not share
+data/notes/*.txt
+data/notes/*.pdf
+
+# Personal progress data – do not share
+data/progress.json
+data/study_plans.json
+
+# Private logs
+logs/*.jsonl
+logs/*.log
+
+# OS artefacts
+.DS_Store
+Thumbs.db
+
+# Build artefacts
+dist/
+build/
+*.egg-info/
+
+# pytest cache
+.pytest_cache/
