@@ -117,6 +117,28 @@ class TestExtractToolCalls:
         assert traces[0]["tool_name"] == "list_notes"
         assert "python_basics.txt" in traces[0]["result"]
 
+    def test_multiple_tool_calls_extracted(self):
+        """Multiple tool calls and results in a single turn are correctly paired by ID."""
+        from langchain_core.messages import AIMessage, ToolMessage
+        from agent import extract_tool_calls_from_messages
+
+        ai_msg = AIMessage(
+            content="",
+            tool_calls=[
+                {"name": "search_notes", "args": {"query": "python"}, "id": "call_1"},
+                {"name": "get_progress", "args": {"topic": "python"}, "id": "call_2"},
+            ],
+        )
+        tool_msg_1 = ToolMessage(content="Passage from python_basics.txt", tool_call_id="call_1")
+        tool_msg_2 = ToolMessage(content="Score: 5/5", tool_call_id="call_2")
+
+        traces = extract_tool_calls_from_messages([ai_msg, tool_msg_1, tool_msg_2])
+        assert len(traces) == 2
+        assert traces[0]["tool_name"] == "search_notes"
+        assert traces[0]["result"] == "Passage from python_basics.txt"
+        assert traces[1]["tool_name"] == "get_progress"
+        assert traces[1]["result"] == "Score: 5/5"
+
 
 # ── Live Ollama integration test (opt-in) ─────────────────────────────────────
 
